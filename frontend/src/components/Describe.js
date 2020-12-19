@@ -106,7 +106,7 @@ export class Describe extends React.Component {
         let cols = this.cols();
         let tensorValues = [];
 
-        for (let i = 0; i < 21; i++) {
+        for (let i = 0; i < cols.length; i++) {
             if (cols[i].type == "bool" || cols[i].type == "sex") {
                 // Neutral value is 2 except if there is a "neutral" property
                 if (colsValues[i] === null)
