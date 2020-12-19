@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+  font-family: Montserrat;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar {
+  border-bottom: 1px solid #DDD;
+  box-shadow: 0 3px 3px 0px #EEE;
+}
+
+.navbar.bg-light {
+  background-color: #DEDEDE !important;
+}
+
+.btn-primary {
+  background-color: #A45BA2;
+  border-color: #A45BA2;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: #623062 !important;
+  border-color: #623062 !important;
+}
+
+.btn-yes {
+  background-color: #5DA271;
+  border-color: #5DA271;
+}
+
+.btn-yes.btn-primary:hover, .btn-yes.btn-primary:focus, .btn-yes.btn-primary:active {
+  background-color: #478058 !important;
+  border-color: #478058 !important;
+}
+
+.btn-no {
+  background-color: #A53B40;
+  border-color: #A53B40;
+}
+
+.btn-no:hover, .btn-no:focus, .btn-no:active {
+  background-color: #7d2c30 !important;
+  border-color: #7d2c30 !important;
+}
+
+.btn-na {
+  background-color: #CC834B;
+  border-color: #CC834B;
+}
+
+.btn-na:hover, .btn-na:focus, .btn-na:active {
+  background-color: #a1683d !important;
+  border-color: #a1683d !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #A45BA2;
+}
+
+.progress-bar {
+  background-color: #A45BA2;
+}
