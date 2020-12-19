@@ -15,7 +15,7 @@ export class AppHeader extends React.Component {
         return (
             <nav className="navbar navbar-light bg-light navbar-expand-lg">
                 <Link className="navbar-brand ml-3" to="/">
-                    Dr. Rare
+                    CoronAIrus
                 </Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
