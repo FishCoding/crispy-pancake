@@ -1,0 +1,17 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+		const model = tf.loadGraphModel("./models/web_model/model.json");
+		model.then(x => {
+			var input = tf.tensor2d([[ 4.,  1.,  2.,  0.,  2.,  1.,  2.,  0.,  2.,  0.,  0.,  2.,  0.,
+         0.,  2.,  1.,  2.,  2.,  0.,  0.,  0.], [ 3.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  2.,  0.,  0.,  2.,  1.,
+         0.,  2.,  0.,  0.,  1.,  0.,  0.,  0.]]);
+			x.predict(input).print();
+		});
+    </script>
+    <div id="res">
+    </div>
+</body>
