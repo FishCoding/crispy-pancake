@@ -12,11 +12,11 @@ class Home extends React.Component {
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
                     <h1 className="display-4">Jr. CoronAIrus </h1>
-                    <p className="lead">You will be asked to describe your symptoms and then answer some questions.</p>
+                    <p className="lead">Find out the probability of having COVID-19 while diagnosing your patient.</p>
                 </div>
                 <hr className="my-4" />
                     <div className="container">
-                        <Link className="btn btn-primary btn-lg" to="/describe">Start!</Link>
+                        <Link className="btn btn-primary btn-lg" to="/diagnose">Start!</Link>
                     </div>
             </div>
         );

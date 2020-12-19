@@ -30,7 +30,7 @@ export class Describe extends React.Component {
         { name: 'resp', type: 'bool', question : "Does the patient present dyspnea?", neutral: 0.5 },
         { name: 'wheezing', type: 'bool', question : "Does the patient present wheezing?" },
         { name: 'nasal_congestion', type: 'bool', question : "Does the patient present nasal congestion?" },
-        { name: 'fatiga', type: 'bool', question : "Does the patient present fatiga?" },
+        { name: 'fatiga', type: 'bool', question : "Does the patient present fatigue?" },
         { name: 'crackles', type: 'bool', question : "Does the patient present crackles?" },
         { name: 'headache', type: 'bool', question : "Does the patient present headache?" },
         { name: 'vomiting', type: 'bool', question : "Does the patient present vomiting?" },
@@ -63,7 +63,7 @@ export class Describe extends React.Component {
                 <option disabled selected>Choose.. </option>
                 <option value="0">No </option>
                 <option value="1">Yes</option>
-                <option value="2">Unknown</option>
+                <option value="0.5">Unknown</option>
                 </select>);
             }
             else if(cols[i].type == "sex"){
@@ -71,7 +71,7 @@ export class Describe extends React.Component {
                 <option disabled selected>Choose.. </option>
                 <option value="0">Male</option>
                 <option value="1">Female</option>
-                <option value="2">Not specified</option>
+                <option value="0.5">Not specified</option>
                 </select>);
 
             }
@@ -113,7 +113,7 @@ export class Describe extends React.Component {
             if (cols[i].type == "bool" || cols[i].type == "sex") {
                 // Neutral value is 2 except if there is a "neutral" property
                 if (colsValues[i] === null)
-                    tensorValues.push(cols[i].neutral || 2.0);
+                    tensorValues.push(0.5);
                 else
                     tensorValues.push(parseFloat(colsValues[i]));
             } else {
@@ -170,7 +170,7 @@ export class Describe extends React.Component {
                                 className={'progressbar'} />
                     </div>
                     </div>
-                    
+
                 </Container>
             </>
         );
