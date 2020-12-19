@@ -3,13 +3,17 @@ import React from 'react';
 //import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Container } from 'react-bootstrap';
 import * as tf from '@tensorflow/tfjs';
+import ProgressBar from 'react-progressbar.js';
 
 export class Describe extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            colsValues: new Array(this.cols().length).fill(null)
+            colsValues: new Array(this.cols().length).fill(null),
+            pred: 1.0
         };
+
+        this.model = tf.loadGraphModel(process.env.PUBLIC_URL + "/models/web_model/model.json");
     }
 
     cols() {
@@ -25,7 +29,7 @@ export class Describe extends React.Component {
         { name: 'dysphonia', type: 'bool', question : "Does the patient present dysphonia?" },
         { name: 'resp', type: 'bool', question : "Does the patient present dyspnea?", neutral: 0.5 },
         { name: 'wheezing', type: 'bool', question : "Does the patient present wheezing?" },
-      { name: 'nasal_congestion', type: 'bool', question : "Does the patient present nasal congestion?" },
+        { name: 'nasal_congestion', type: 'bool', question : "Does the patient present nasal congestion?" },
         { name: 'fatiga', type: 'bool', question : "Does the patient present fatiga?" },
         { name: 'crackles', type: 'bool', question : "Does the patient present crackles?" },
         { name: 'headache', type: 'bool', question : "Does the patient present headache?" },
@@ -47,6 +51,7 @@ export class Describe extends React.Component {
         let colsValues = [...this.state.colsValues];
         colsValues[i] = val;
         this.setState({colsValues});
+        this.refreshModel();
     }
 
     createForm() {
@@ -100,8 +105,7 @@ export class Describe extends React.Component {
         )
     }
 
-    handleSubmit(event) {
-        const model = tf.loadGraphModel(process.env.PUBLIC_URL + "/models/web_model/model.json");
+    refreshModel() {
         let colsValues = this.state.colsValues;
         let cols = this.cols();
         let tensorValues = [];
@@ -130,12 +134,10 @@ export class Describe extends React.Component {
             }
         }
 
-        model.then(x => {
+        this.model.then(x => {
             var input = tf.tensor2d([tensorValues]);
-            alert(x.predict(input));
+            this.setState({pred: x.predict(input)[0][0]});
         });
-        
-        event.preventDefault();
     }
 
     render() {
@@ -143,6 +145,17 @@ export class Describe extends React.Component {
             <>
                 <Container>
                     <form>
+                        <div className="row pt-4">
+                            <div className="col">
+                                <ProgressBar.SemiCircle
+                                    progress={this.state.pred}
+                                    text={'test'}
+                                    // options={options}
+                                    initialAnimate={true}
+                                    // containerStyle={containerStyle}
+                                    containerClassName={'.progressbar'} />
+                            </div>                       
+                        </div>
                         <div className="row pt-4">
                             {this.createForm()}
                         </div>

@@ -12,10 +12,12 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.3",
+    "progressbar.js": "^1.1.0",
     "react": "^16.14.0",
     "react-autocomplete": "^1.8.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.14.0",
+    "react-progressbar.js": "git+https://github.com/kimmobrunfeldt/react-progressbar.js.git",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1"
   },
