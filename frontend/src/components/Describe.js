@@ -10,7 +10,7 @@ export class Describe extends React.Component {
         super(props);
         this.state = {
             colsValues: new Array(this.cols().length).fill(null),
-            pred: 1.0
+            pred: 0.0
         };
 
         this.model = tf.loadGraphModel(process.env.PUBLIC_URL + "/models/web_model/model.json");
@@ -50,8 +50,7 @@ export class Describe extends React.Component {
         let val = e.target.value;
         let colsValues = [...this.state.colsValues];
         colsValues[i] = val;
-        this.setState({colsValues});
-        this.refreshModel();
+        this.setState({colsValues}, () => { this.refreshModel() });
     }
 
     createForm() {
@@ -124,8 +123,8 @@ export class Describe extends React.Component {
                     if (cols[i].name == "highest_fever") {
                         let aux = parseFloat(colsValues[i]);
                         if      (aux > 37.5 && aux < 38) tensorValues.push(1.0);
-                        else if (aux > 38 && aux < 39) tensorValues.push(2.0);
-                        else if (aux > 39) tensorValues.push(3.0);
+                        else if (aux >= 38 && aux < 39) tensorValues.push(2.0);
+                        else if (aux >= 39) tensorValues.push(3.0);
                         else tensorValues.push(-1.0);
                     }
                     else
@@ -135,8 +134,13 @@ export class Describe extends React.Component {
         }
 
         this.model.then(x => {
+            console.log(tensorValues);
             var input = tf.tensor2d([tensorValues]);
-            this.setState({pred: x.predict(input)[0][0]});
+            x.predict(input).array().then(x => {
+                let score = x[0][0];
+                console.log(score);
+                this.setState({pred: score});
+            });
         });
     }
 
@@ -144,27 +148,29 @@ export class Describe extends React.Component {
         return (
             <>
                 <Container>
-                    <form>
-                        <div className="row pt-4">
-                            <div className="col">
-                                <ProgressBar.SemiCircle
-                                    progress={this.state.pred}
-                                    text={'test'}
-                                    // options={options}
-                                    initialAnimate={true}
-                                    // containerStyle={containerStyle}
-                                    containerClassName={'.progressbar'} />
-                            </div>                       
+                    <div className="row pt-4">
+                        <div className="col-10">
+                            <form>
+                                <div className="row">
+                                    {this.createForm()}
+                                </div>
+                                {/* <div className="row pb-4">
+                                    <div className="col">
+                                        <button type="button" className="btn btn-dark btn-block" onClick={(e) => this.handleSubmit(e)}>Submit</button>
+                                    </div>
+                                </div> */}
+                            </form>
                         </div>
-                        <div className="row pt-4">
-                            {this.createForm()}
-                        </div>
-                        <div className="row pb-4">
-                            <div className="col">
-                                <button type="button" className="btn btn-dark btn-block" onClick={(e) => this.handleSubmit(e)}>Submit</button>
-                            </div>
-                        </div>
-                    </form>
+                        <div className="col">
+                            <ProgressBar.SemiCircle
+                                progress={this.state.pred}
+                                text={this.state.pred.toFixed(2)}
+                                // options={options}
+                                initialAnimate={true}
+                                className={'progressbar'} />
+                    </div>
+                    </div>
+                    
                 </Container>
             </>
         );

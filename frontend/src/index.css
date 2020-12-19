@@ -65,3 +65,8 @@ code {
 .progress-bar {
   background-color: #A45BA2;
 }
+
+.progressbar {
+  position: sticky !important;
+  top: 20px;
+}
