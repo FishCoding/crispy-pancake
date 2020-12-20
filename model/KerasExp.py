@@ -23,7 +23,7 @@ from tensorflow.keras.layers.experimental import preprocessing
 # In[2]:
 
 
-test = pd.read_csv("~/sintomas.csv")
+test = pd.read_csv("sintomas.csv")
 
 
 # In[3]:
