@@ -23,7 +23,7 @@ export class Describe extends React.Component {
         { name: 'school_symptoms', type: 'bool', question : "Anyone at school with COVID-19 symptoms?" },
         { name: 'school_confirmed', type: 'bool', question : "Anyone at school with COVID-19 confirmed?" },
         { name: 'fever', type: 'bool', question : "Does the patient have fever?" },
-        { name: 'highest_fever', type: 'int', question : "Which has been the highest fever detected?" },
+        { name: 'highest_fever', type: 'int', question : "Which has been the highest fever detected?", step: "0.5" },
         { name: 'tos', type: 'bool', question : "Does the patient present a cough?" },
         { name: 'crup', type: 'bool', question : "Does the patient present crup?" },
         { name: 'dysphonia', type: 'bool', question : "Does the patient present dysphonia?" },
@@ -76,7 +76,7 @@ export class Describe extends React.Component {
 
             }
             else {
-                aux = (<input className='form-control' id={cols[i].name} onChange={(e) => {this.handleChange(e, i)}} type='number' />);
+                aux = (<input className='form-control' id={cols[i].name} step={cols[i].step || "1"} onChange={(e) => {this.handleChange(e, i)}} type='number' />);
             }
 
             input.push(
